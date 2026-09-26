@@ -21,9 +21,11 @@ README.md             what the plugin is and how to install it
 Each skill folder holds only `SKILL.md` and `references/`. Repo-level files
 (changelog, agent rules) live at the root, never inside a skill.
 
-**Local dev:** `~/.claude/skills/<skill>` symlinks point at `skills/<skill>/`,
-so saved edits are live in every session. Don't also install the plugin on the
-same machine, or each skill loads twice. Alternative: `claude --plugin-dir .`.
+**Local dev:** the plugin is installed from GitHub
+(`brightnest@thebrightnest`) and runs from a cached copy, so edits here aren't
+live. To test uncommitted changes, disable the installed plugin and run
+`claude --plugin-dir .`, or each skill loads twice. To release: bump `version`
+in `plugin.json`, push, then run `/plugin marketplace update thebrightnest`.
 
 ## Rules for every skill
 
