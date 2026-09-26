@@ -1,0 +1,11 @@
+{
+  "name": "brightnest",
+  "version": "1.0.0",
+  "description": "Product and design skills: design-pass (understand a frontend, then propose and build design changes) and product-pass (keep the business side and the product codebase telling the same story).",
+  "author": {
+    "name": "Pedro Rocha",
+    "url": "https://github.com/thebrightnest"
+  },
+  "repository": "https://github.com/thebrightnest/skills",
+  "keywords": ["design", "product", "ux", "audit", "personas", "journeys"]
+}

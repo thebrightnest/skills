@@ -1,0 +1,17 @@
+{
+  "name": "thebrightnest",
+  "owner": {
+    "name": "Pedro Rocha",
+    "url": "https://github.com/thebrightnest"
+  },
+  "metadata": {
+    "description": "Product and design skills for Claude Code from The Bright Nest."
+  },
+  "plugins": [
+    {
+      "name": "brightnest",
+      "source": "./",
+      "description": "Product and design skills: design-pass and product-pass."
+    }
+  ]
+}
