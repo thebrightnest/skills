@@ -12,6 +12,22 @@ carries `mirror as of <version>`, because the other side may have moved on.
 
 ---
 
+## 0. Check the input is deep enough to review
+
+Run the depth check on the business half before judging fit
+(`business-inputs.md` step 5, `journeys.md` "Depth check"). On the app side
+you hold a mirror, so you can't fix it, but you can say it:
+
+- A `now` persona missing **What they need**, **Trust** or **Scenarios**, or a
+  thin journey, gets a line in **Not verified**: "fit for C2 is shallower than
+  it looks: no trust needs, no scenarios".
+- If the mirror's `SOURCES.md` shows rows that landed nowhere, or cites
+  sources richer than the mirror, add a `confirm` item addressed to the
+  business side ("restore what the intake dropped?").
+
+A thin business half makes the product look like it fits. Say so rather than
+rate it `served`.
+
 ## 1. Align every intended journey with its actual journey
 
 For each intended journey in `business/journeys.md`, take the actual journey
@@ -39,6 +55,14 @@ Also check the journey-level fields:
 - **Walks away with:** does the actual output give them this?
 - **Must not:** does anything in the actual journey do it anyway?
 - **Time budget:** does the actual path fit it? (a walked journey only)
+- **Trusts it when:** does the result show what the persona needs to believe
+  it? A result they wouldn't trust is `diverges` at the output step, even if
+  it's complete.
+- **Gives up if:** does the actual step do the thing that makes them give up?
+  If so, that step's `friction` becomes `diverges`.
+- **(guide) steps:** rated like any step. An entry that asks for setup before
+  value, when the guide step says "nothing to set up", `diverges`.
+- **Shows it to:** is there an output they can hand to that person?
 
 Then give the journey one overall verdict:
 
@@ -50,6 +74,18 @@ Then give the journey one overall verdict:
 | **refused** | The job itself sits outside the boundaries. That's a business conversation, not a gap |
 
 A `now` journey that is only `traced` can be at most **partial (unverified)**.
+
+## 1b. Trust needs and worked scenarios
+
+Two checks that journeys alone miss:
+
+- **Trust needs.** One row per persona's **What they need to trust it**:
+  need, what the product shows today, status, evidence.
+- **Scenarios.** Run each `now` persona's worked scenarios through the actual
+  journeys, on paper. What they bring (a catalogue, a URL, a CSV) is where
+  input gaps appear: the journey says "bring the material" and the scenario
+  shows the material is a PDF the product can't take. Each break is a gap like
+  any other.
 
 ## 2. Persona × job matrix
 
@@ -147,6 +183,12 @@ business_as_of: <sha|date>
 
 ## Contradictions
 …
+
+## Trust needs
+<one row per persona trust need: need · product today · status · evidence>
+
+## Scenarios
+<only the scenarios that break: scenario · where it breaks · gap #>
 
 ## Code-ahead
 …

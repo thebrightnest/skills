@@ -25,22 +25,26 @@ journey asks for gets an `A-` ID (`A-3`). Those are the code-ahead candidates.
 ```markdown
 ### J-C1-1: Check a post before publishing
 
-- **Persona:** C1 Global voice without local teams
-- **Job:** Check a piece before publishing: how each audience reads it, and which line carries the risk.
-- **Evidence:** Real (1 person)    **Priority:** now
-- **Trigger:** A post is drafted. About 10 minutes before posting.
+- **Persona:** C1 · **Jobs:** C1.1, C1.3 · **Evidence:** Real (1 person) · **Priority:** now
+- **Trigger:** "I'm about to publish." A post is drafted, about 10 minutes before it goes out.
+- **Stakes:** a post that reads as disrespect in one market is screenshotted before it's deleted.
 
-| # | Step | What the user needs at this step |
-|---|---|---|
-| 1 | Entry | Paste text or a screenshot first. Nothing to set up. |
-| 2 | Choose audiences | Ready-made audiences by market and role, remembered after first use. |
-| 3 | Read | Per audience: understood / risky, the line that causes it, the reason. |
-| 4 | Decide | Publish, adjust, drop. Adjust = one click to retest against the same audiences. |
-| 5 | Return | Next week, same audiences already selected. |
+| # | Step | What the user needs at this step | Gives up if |
+|---|---|---|---|
+| 1 | Entry | Paste text or a screenshot, first. Nothing to set up before value. (guide) | Asked to configure anything first |
+| 2 | Choose audiences | Several audiences by market and role, remembered after first use. | |
+| 3 | Read | Per audience, leading with risk: understood or risky, the line that causes it, the reason. (guide) | It's a score without a reason |
+| 4 | Ambiguity | Where readings of humor diverge, it says "ambiguous" instead of choosing. | |
+| 5 | Decide | Publish, adjust or drop. Adjusting retests against the same audiences in one step. (guide) | |
+| 6 | Return | Next week, same audiences already selected. (guide) | |
 
+- **Trusts it when:** each reading gives a cultural reason, not a score, and ambiguity is admitted.
+- **Shows it to:** nobody. The decision is theirs.
 - **Walks away with:** a publish / adjust / drop decision, with the risky line named, per audience.
-- **Must not:** predict engagement or reach. Say "ambiguous" when readings diverge.
-- **Time budget:** minutes.
+- **Must not:** predict engagement or reach. Give a confident verdict when readings diverge.
+- **Time budget:** minutes. The alternative is a message to a colleague.
+- **Variants:** —
+- **Scenarios:** C1-a (Real), C1-b, C1-c.
 ```
 
 The same shape for a platform product (example B in `app-snapshot.md`):
@@ -48,26 +52,61 @@ The same shape for a platform product (example B in `app-snapshot.md`):
 ```markdown
 ### J-T2-1: Let an agent work from my inbox
 
-- **Persona:** T2 Operator running a small team's workspace
-- **Job:** Have an agent triage my email and calendar without handing my password to anything.
-- **Evidence:** Observed    **Priority:** now
-- **Trigger:** Monday morning backlog.
+- **Persona:** T2 · **Job:** T2.1 · **Evidence:** Observed · **Priority:** now
+- **Trigger:** "Monday morning, 200 unread."
+- **Stakes:** a missed client email, or a credential leaked to a tool they didn't vet.
 
-| # | Step | What the user needs at this step |
-|---|---|---|
-| 1 | Entry | Arrive in my workspace already signed in. |
-| 2 | Connect | Connect Google once, see exactly which scopes, revoke any time. |
-| 3 | Delegate | Ask in plain words; the agent uses the connection without asking again. |
-| 4 | Trust | See what the agent read and did. |
+| # | Step | What the user needs at this step | Gives up if |
+|---|---|---|---|
+| 1 | Entry | Arrive in my workspace already signed in. (guide) | Asked to sign in twice |
+| 2 | Connect | Connect the mail account once, see exactly which scopes, revoke any time. | Scopes aren't shown |
+| 3 | Delegate | Ask in plain words; the agent uses the connection without asking again. | |
+| 4 | Check | See what the agent read and did. | |
 
+- **Trusts it when:** every action is listed with what it touched, and nothing happened that wasn't asked.
+- **Shows it to:** their team lead, when a triage rule changes.
 - **Walks away with:** a triaged inbox and a list of what the agent touched.
-- **Must not:** store my Google password, or let another workspace see my mail.
+- **Must not:** store the mail password, or let another workspace see the mail.
 - **Time budget:** under 5 minutes to first result.
+- **Scenarios:** T2-a.
 ```
 
-Required fields: persona, job, evidence, priority, trigger, steps, walks away
-with. `Must not` and `Time budget` are strongly recommended, because they're
-what the fit review checks boundaries and friction against.
+Fields:
+
+| Field | Tier | Why the fit review needs it |
+|---|---|---|
+| Persona, jobs, evidence, priority | Required | Ranking |
+| Trigger, in their words | Required | Entry-point check |
+| Steps: what the user needs | Required | Step-by-step alignment |
+| Walks away with | Required | Output check |
+| Must not | Required | Boundary and contradiction check |
+| Trusts it when | Depth | Trust check: the most common silent gap |
+| Time budget | Depth | Friction check on a walked journey |
+| Stakes | Depth | Severity of a `diverges` or `missing` step |
+| Gives up if | Depth | Turns friction into a rated failure |
+| (guide) steps | Depth | Checks entry, defaults and what leads the result |
+| Shows it to | Depth | Hand-over and export needs |
+| Variants | Depth, when the persona has them | A step that differs by variant |
+| Scenarios | Depth | Links the persona's worked scenarios the fit review runs |
+
+**(guide) steps.** How a persona should be guided (the entry, the defaults,
+what the result leads with) is a need like any other. Write it at the step it
+applies to and mark it `(guide)`. "Stimulus-first entry" becomes "paste first,
+nothing to set up before value". Never drop guidance because it sounds like a
+feature. Rephrase it as a need.
+
+### Depth check
+
+A journey is **thin** when any of these hold:
+
+- a step a reviewer couldn't rate `match` or `missing` ("a good experience");
+- the entry step has no (guide) need, so how they start is unspecified;
+- no **Trusts it when**;
+- **Walks away with** isn't a concrete thing (a decision, a list, a file);
+- a job in `personas.md` has no journey and no line saying which journey carries it.
+
+Thin journeys are reported in the intake summary with the persona depth
+check (`business-inputs.md` step 5).
 
 Intended journeys describe needs, never repos or screens. The business side
 doesn't know or care how many services deliver them.

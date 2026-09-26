@@ -91,7 +91,7 @@ Do not work from memory. These files are the source of truth for their step.
 | Movement 0, always | `references/orient.md` |
 | Writing or refreshing anything in `app/` | `references/app-snapshot.md` |
 | Tracing or walking an actual journey | `references/journeys.md` |
-| `intake`, or judging whether business inputs are complete | `references/business-inputs.md` |
+| `intake`, the persona template, the depth check, the depth round, or judging whether business inputs are complete | `references/business-inputs.md` |
 | Movement 2: the fit review | `references/fit.md` |
 | `check <material>` | `references/check.md` |
 | Adding, ordering or resolving anything unsettled | `references/decisions.md` |
@@ -136,12 +136,18 @@ the most useful paragraph you will write, and `understand` ends here.
 
 ## Movement I: Intake (business side)
 
-Read `references/business-inputs.md`. Collect or refine the three business
-files. Every persona and journey carries an evidence tag. What's missing
-becomes a `clarify` item. What you draft becomes a `confirm` item. Proposed
-changes from new material become `decide` items. Drafts are used right away,
-and confirming them is a register item, not a precondition. End with the
-handoff (`references/orient.md`): what to copy to the app side.
+Read `references/business-inputs.md` and fill its templates, not a minimum.
+Harvest every source: the governing one settles conflicts, and every
+non-conflicting field from every source is kept. Guidance becomes (guide)
+journey steps, concrete situations become worked scenarios, and nothing is
+dropped for sounding like a feature. Write the source coverage ledger
+(`business/SOURCES.md`), run the depth check, then ask the depth round: at
+most five questions, after the draft exists. Every persona and journey
+carries an evidence tag. What's still missing becomes a `clarify` item. What
+you draft becomes a `confirm` item. Proposed changes from new material become
+`decide` items. Drafts are used right away, and confirming them is a register
+item, not a precondition. End with the depth summary and the handoff
+(`references/orient.md`): what to copy to the app side.
 
 ## Movement C: Check (business side)
 
@@ -170,7 +176,10 @@ does.
 1. **Staleness.** App side: compare `app/` against the code changed in each
    repo since its `as_of` commit. Business side: report how old the received
    `app/` is, and whether a newer copy arrived that hasn't been absorbed.
-2. **Fit.** Read `references/fit.md` in full and run it. Align intended against
+2. **Depth.** Run the depth check on `business/` (`fit.md` step 0). On the
+   business side, also compare it against `SOURCES.md` and the sources it
+   cites: a field a source has and the half lacks is a loss, and a finding.
+3. **Fit.** Read `references/fit.md` in full and run it. Align intended against
    actual journeys, step by step. Then produce the persona × job matrix,
    contradictions, code-ahead, and gaps ranked by evidence × priority.
 
@@ -234,3 +243,8 @@ already in the register (open, decided or dismissed).
 12. **One place for what's unsettled.** Open questions, TBDs and pending
     decisions live only in `decisions.md`. Other files state what is, and may
     reference an item's ID.
+13. **Never thin what you're given.** A source's needs, trust conditions,
+    rhythm, stakes, guidance and scenarios are kept, converted or ledgered,
+    never silently dropped. The templates set the floor for what to ask, not a
+    ceiling on what to keep. A thin business half hides gaps, and a fit review
+    built on it looks better than the product is.

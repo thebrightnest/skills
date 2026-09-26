@@ -257,6 +257,13 @@ Standing order of authority:
 If two sources disagree and neither clearly wins, that is a finding. Report
 it; don't pick a side silently.
 
+**Governing settles conflicts. It doesn't decide what's kept.** When several
+sources describe the same personas (three analyses of one founder
+conversation, a study and a deck), the governing one wins where they
+disagree. Everything else they say that doesn't conflict is harvested
+(`business-inputs.md` step 2). Ruling a source "not governing" never means
+ignoring it.
+
 ## 6. App side: how to run it
 
 For each `user` repo, record the dev command, the port, and whether it needs

@@ -3,6 +3,24 @@
 All notable changes to the brightnest plugin. Versions follow `version` in
 `.claude-plugin/plugin.json`. Scope each entry by skill: `**design-pass:** …`.
 
+## 1.1.0 (2026-09-26)
+
+- **product-pass:** a persona template with Required, Depth and Optional
+  tiers, each field with a "thin if" test. It replaces the persona minimum,
+  which intakes had been treating as the whole template.
+- **product-pass:** intended journeys gain Trusts it when, Stakes, Gives up
+  if, Shows it to, (guide) steps and a Scenarios link, plus a depth check.
+- **product-pass:** intake harvests every source instead of picking one. The
+  governing source settles conflicts only. Guidance becomes (guide) steps and
+  situations become worked scenarios.
+- **product-pass:** intake writes a source coverage ledger
+  (`business/SOURCES.md`), runs a depth check, and ends with a depth round of
+  at most five questions, asked after the draft exists.
+- **product-pass:** the fit review checks input depth first (step 0) and runs
+  trust needs and worked scenarios against the product (step 1b). A result the
+  persona wouldn't trust rates the step `diverges`.
+- **product-pass:** new rule 13, "Never thin what you're given".
+
 ## 1.0.0 (2026-09-26)
 
 - The repo is a Claude Code plugin. Skills live in `skills/<name>/`, the

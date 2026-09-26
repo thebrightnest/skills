@@ -14,7 +14,8 @@ step 2).
 ├── business/        owned on the business side, received by copy on the app side
 │   ├── personas.md
 │   ├── journeys.md
-│   └── promises.md
+│   ├── promises.md
+│   └── SOURCES.md   source coverage ledger: where each source section landed
 ├── app/             owned on the app side, received by copy on the business side
 │   ├── capabilities.md
 │   ├── journeys.md
@@ -91,7 +92,8 @@ side:
 
 ## Section skeletons
 
-- `personas.md`: see `business-inputs.md` (minimum per persona, evidence log).
+- `personas.md`: see `business-inputs.md` (persona template, file-level sections, evidence log).
+- `SOURCES.md`: see `business-inputs.md`, step 3.
 - `journeys.md` (either side): see `journeys.md` (intended and actual formats).
 - `promises.md`: the table in `business-inputs.md`.
 - `capabilities.md`, `boundaries.md`, `grounding.md`, `glossary.md`: see
