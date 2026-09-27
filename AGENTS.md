@@ -45,8 +45,10 @@ in `plugin.json`, push, then run `/plugin marketplace update thebrightnest`.
 
 Keeps a contract between a product's business side (personas, intended
 journeys, promises) and its codebase (a present-tense snapshot of what the
-product does). Both sides share a fit review and a decisions register. Works
-for any product, including one spread across several repos.
+product does). Both sides share a fit review and a decisions register. On the
+business side it guides: sources are harvested into staging and walked with
+the user, and only what they confirm enters the contract. Works for any
+product, including one spread across several repos.
 
 ```text
 SKILL.md              entry point: sides, modes, movements, rules, section index
@@ -54,10 +56,11 @@ references/           one file per step, loaded only when that step runs
   orient.md           Movement 0: side, repos, received copies, governing docs
   app-snapshot.md     the app/ half: capabilities, boundaries, grounding, glossary
   journeys.md         intended vs actual journeys, tracing and walking
-  business-inputs.md  the business/ half and intake
+  business-inputs.md  the business/ half and intake: harvest, stage, walk, confirm
+  definitions.md      the quality bar and coaching questions for each definition type
   fit.md              the fit review
   check.md            reviewing material against app/
-  decisions.md        the shared register
+  decisions.md        the shared register, one file per item
   templates.md        first-time file creation
 ```
 
@@ -80,7 +83,11 @@ references/           one file per step, loaded only when that step runs
 
 - Keep the contract schema in `references/orient.md` step 1 in sync with
   `references/templates.md` and every example that shows `as_of`, `sources` or
-  evidence citations (`<repo>:<path>[:<line>]`).
+  evidence citations (`<repo>:<path>[:<line>]`). The folder layout in
+  `templates.md` is part of the schema: keep it in sync with the handoff in
+  `orient.md` and the paths in every reference.
+- Nothing reaches `business/` without the user confirming it in the walk. A
+  change that lets drafts in unconfirmed breaks the skill's core promise.
 - When the schema changes, list the live contracts that need migrating and
   offer to migrate them. They live in the product repos (`docs/product/`) and
   business folders (`product-contract/`).

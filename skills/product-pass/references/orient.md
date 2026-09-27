@@ -115,8 +115,8 @@ When you start, find out what arrived.
 ```bash
 cd "<contract_dir>"
 other=business   # or app, on the business side
-grep -h -A8 '^---' "$other"/*.md 2>/dev/null | grep -E '^(contract|as_of|updated):' | sort -u
-grep -h -A8 '^---' app/*.md business/*.md 2>/dev/null | grep -E '^(contract|as_of):' | sort | uniq -c
+grep -rh -A8 '^---' --include=*.md "$other" 2>/dev/null | grep -E '^(contract|as_of|updated):' | sort -u
+grep -rh -A8 '^---' --include=*.md app business 2>/dev/null | grep -E '^(contract|as_of):' | sort | uniq -c
 ```
 
 Compare with what `contract.json` says you hold:
@@ -132,8 +132,11 @@ Compare with what `contract.json` says you hold:
   `validate` item asking for a fresh copy is worth adding.
 - **Missing:** the other side has no contract yet, or it was never copied. On
   the business side, `intake` can start one. On the app side, fit review needs
-  `business/`. Offer to draft personas from existing materials, marked
-  Unconfirmed (see `business-inputs.md`).
+  `business/`, and only the business side can confirm it. Write the actual
+  journeys with `A-` IDs and ask for an intake on the business side.
+- **A `staging/` folder arrived on the app side:** someone copied the whole
+  contract. Staging is the business side's workspace and never counts. Ignore
+  it, say so once, and suggest deleting it here.
 
 **Overwrite guard.** Copying a whole folder can clobber *your own* half with an
 older version. If your half's frontmatter `as_of` is older than what
@@ -153,12 +156,13 @@ Tell the user exactly what to copy and where it lands:
 
 ```text
 Copy to the <other side>'s <contract_dir>/:
-  <my half>/            → replaces their mirror
-  fit.md               → replaces theirs
-  decisions.md         → save as decisions.incoming.md (they merge it)
+  <my half>/     → delete their <my half>/ first, then copy (a copy never removes a dropped file)
+  fit.md         → replaces theirs
+  decisions/     → copy as decisions.incoming/ (they merge it)
 ```
 
-`contract.json` never travels. Each side keeps its own.
+`contract.json` and `staging/` never travel. Each side keeps its own
+`contract.json`, and staging exists only on the business side.
 
 ## 3. App side: what changed since the snapshot, per repo
 
@@ -213,8 +217,8 @@ automatic edits.
 
 ## 4b. Merge the decisions register
 
-If `decisions.incoming.md` exists, merge it into `decisions.md` by ID (rules in
-`decisions.md`), then delete it. Every later movement checks the merged
+If `decisions.incoming/` exists, merge it into `decisions/` file by file
+(rules in `decisions.md`), then delete it. Every later movement checks the merged
 register before raising anything, so findings already open, decided or
 dismissed aren't raised twice. A dismissed finding stays dismissed unless the
 evidence changed.
@@ -260,9 +264,10 @@ it; don't pick a side silently.
 **Governing settles conflicts. It doesn't decide what's kept.** When several
 sources describe the same personas (three analyses of one founder
 conversation, a study and a deck), the governing one wins where they
-disagree. Everything else they say that doesn't conflict is harvested
-(`business-inputs.md` step 2). Ruling a source "not governing" never means
-ignoring it.
+disagree. Everything else they say that doesn't conflict is harvested into
+staging (`business-inputs.md` step 3). Ruling a source "not governing" never
+means ignoring it. Harvesting never means confirming it either: nothing
+reaches `business/` without the walk.
 
 ## 6. App side: how to run it
 
@@ -295,7 +300,8 @@ Repos:           <key>@<short sha>: <N commits since, files stale | unreachable>
 My half:         as of <version>: <N changes since | unabsorbed material: …>
 Other half:      <received <version> on <date>: newly arrived | unchanged | missing>
 Fit:             built from app <versions> + business <v>: <current | stale>
-Decisions:       <N open (by kind)>, incoming merged: <yes | none>
+Decisions:       <N open (by kind)>, <N noticed>, incoming merged: <yes | none>
+Staging:         <N candidates: confirmed, walking, queued, parked> (business side)
 Governing docs:  <which, and which were ruled out and why>
 Run:             <per repo: command, port, auth?> (app side)
 Target:          <what this run will focus on, and why>

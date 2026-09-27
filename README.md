@@ -5,7 +5,7 @@ A Claude Code plugin with two skills:
 | Skill | What it does |
 |---|---|
 | `design-pass` | Understand a product's frontend, then audit it, propose directions, and build the agreed one. |
-| `product-pass` | Keep the business side (personas, intended journeys, promises) and the product codebase (what it does today) telling the same story. |
+| `product-pass` | Keep the business side (personas, jobs, problems, intended journeys, promises, positioning) and the product codebase (what it does today) telling the same story. Guides you through each definition and keeps only what you confirm. |
 
 ## Install
 

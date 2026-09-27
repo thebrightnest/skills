@@ -26,7 +26,8 @@ judging any of it.
 | **Tense** | — | Planned or partial features described as current |
 | **Invented specifics** | the material's own sources | Figures, prices, customer outcomes or results that nothing supports. Common in model-written scenarios |
 | **Words** | `app/glossary.md` | Terms the product doesn't use, or the glossary's "avoid" list |
-| **Personas** | `business/personas.md` | It targets a persona or job not in the contract, or states an Inferred persona as proven |
+| **Personas** | `business/personas/` | It targets a persona or job not in the contract, or states an Inferred persona as proven |
+| **Positioning** | `business/promises.md` "Positioning", `business/personas/` | Its target, need or alternative matches no confirmed persona, job or **Today they…**, or it contradicts the recorded positioning |
 
 Scenarios and case examples need extra care. A scenario that ends "and the
 persona said Concept A converts better, so they split the budget" is a
@@ -65,7 +66,7 @@ honestly back. For example:
 
 End with the number of findings by severity and what the high ones would
 cost if the material went out as is. Whether it goes out is the user's call.
-If the user wants to track any finding, add it to `decisions.md` as a
+If the user wants to track any finding, add it to `decisions/` as a
 `decide` item ("reword, change the product, or keep the claim?").
 
 ## The received `app/` is a copy

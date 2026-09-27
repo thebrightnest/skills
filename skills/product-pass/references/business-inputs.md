@@ -1,58 +1,66 @@
-# Business inputs: what the business side owes the contract
+# Business inputs: harvest, stage, walk, confirm
 
 The `business/` half is written on the business side. The product follows it
 for **who we serve, why, and how their journey should go**. The app side never
 edits it. It only receives it by copy and reviews fit against it.
 
-Three files:
+**Only what the user confirmed is in `business/`.** Sources are harvested
+into `staging/`, graded, and walked with the user one definition at a time.
+Staging is a workspace, not a contract. It stays on the business side and is
+never copied.
 
-| File | Answers | Template |
+| Path | Holds | Travels |
 |---|---|---|
-| `personas.md` | Who hires the product, for what, what they need, and how sure are we? | "Persona template" below |
-| `journeys.md` | How should each job go for that persona, step by step? | `journeys.md`, "Intended journey format" |
-| `promises.md` | What do we say publicly? | "Promise template" below |
+| `business/personas/README.md` | At a glance, triggers → jobs, evidence log | yes |
+| `business/personas/<ID>.md` | One confirmed persona, its jobs, problems and scenarios | yes |
+| `business/journeys/<persona ID>.md` | That persona's confirmed intended journeys | yes |
+| `business/promises.md` | Confirmed promises and positioning | yes |
+| `staging/README.md` | The walk queue: every candidate, its grade and state | **no** |
+| `staging/SOURCES.md` | The ledger: where every source section went | **no** |
+| `staging/<candidate>.md` | One candidate definition, with what each source said | **no** |
 
-**The fit review is only as sharp as these files.** A persona without its
-needs, or a journey without its trust line, can't produce a gap. The product
-looks like it fits because nobody said what fitting means. A shallow business
-half is a defect, not a simplification.
+**The fit review is only as sharp as `business/`.** A persona without its
+needs, or a journey without its trust line, can't produce a gap. So the walk
+asks for depth. It also works the other way: a persona padded with guesses
+makes gaps look real that nobody has. Depth has to be confirmed, not
+harvested.
 
 ---
 
 ## Persona template
 
-Every field has a tier:
+Every field has a tier. The tier decides what the walk asks for. The user
+decides what's kept.
 
 | Tier | Means | When missing |
 |---|---|---|
-| **Required** | The fit review can't run without it | `clarify` item, weight of the persona. Draft a labelled assumption and carry on |
-| **Depth** | What makes gaps findable. Its absence hides them | Ask the user in the depth round (below). Unanswered: `clarify` item |
-| **Optional** | Useful when the sources have it | Keep it if a source has it. Never ask |
-
-A field in any tier that **a source has** is kept. Tiers decide what to ask
-for, never what to keep.
+| **Required** | The fit review can't run without it | Asked in the walk before the persona is confirmed |
+| **Depth** | What makes gaps findable | Asked in the walk, `now` personas first. Skipped: noted in the queue |
+| **Optional** | Useful when the sources have it | Offered if a source has it. Never asked |
 
 | Field | Tier | What it holds | Thin if |
 |---|---|---|---|
 | **ID and name** | Required | Short stable ID (`C1`, `V2`), a name a customer would recognize | The name is a job title only ("Marketing manager") |
-| **Who** | Required | Role, organization, team size, context | No organization or context |
-| **Variants** | Depth | Sub-types with different needs, material or stakes | Two kinds of buyer are merged into one list of needs |
+| **Who** | Required | Role, organization, team size, the situation | No organization or situation |
+| **Variants** | Depth | Sub-types with different needs, material or stakes | Two kinds of buyer merged into one list of needs |
 | **Triggers** | Required | The moments that send them to the product, **in their words** | Generic ("wants insights", "needs to test") |
-| **Jobs** | Required | "When …, I want …, so …", one per distinct job, numbered (`C1.1`) | No "so", or a feature in the "I want" |
-| **Today they…** | Depth | What they do instead, and **the bar it sets** (speed, cost, trust) | No named alternative, or no bar |
+| **Jobs** | Required | Numbered (`C1.1`), each tagged functional, social or emotional (`definitions.md`, "Job") | No "so", a feature in the "I want", or social and emotional jobs nobody said |
+| **Problem** | Depth, per core job | I am / trying to / but / because / feel, and one line (`definitions.md`, "Problem") | A feature in the "but", a symptom in the "because" |
+| **Today they…** | Depth | What they do instead, the bar it sets (speed, cost, trust), and what would make them switch | No named alternative, no bar, or no reason to leave it |
 | **What they need** | Depth | Needs across the whole journey, feature-free and checkable | Fewer than three, or phrased as features |
-| **What they need to trust it** | Depth | What makes a result believable to them | Missing. It's the field most often lost |
+| **What they need to trust it** | Depth | What makes a result believable to them, and what makes them dismiss it | Missing. It's the field most often lost |
 | **What they bring** | Depth | The material they start from (a post, a catalogue, a CSV, an inbox) | Missing when the product takes input |
 | **Stakes** | Depth | What getting it wrong costs them | Missing |
 | **Rhythm** | Depth | How often the trigger happens | Missing |
+| **In their words** | Optional | Verbatim quotes. **Real only**, with who and when | A quote nobody said |
 | **Buyer, user, approver** | Optional | Who pays, who operates, who signs off, if they differ | |
 | **Channel role** | Optional | Whether one of them brings others (an advisor with clients) | |
 | **Not this persona** | Optional | Near neighbours this persona is not | |
 | **Evidence** | Required | Tag, plus the source. Tag individual claims that differ | Tag without source |
 | **Priority** | Required | `now` / `later` / `vision`. **A business decision.** Never inferred | |
 | **Boundaries** | Required | What the product must not do for them | Copied from another persona unchanged |
-| **Worked scenarios** | Depth | At least one concrete situation per job, tagged | None, or outcomes written as findings |
-| **Open** | — | IDs of their items in `decisions.md`. No questions inline | Questions written inline |
+| **Worked scenarios** | Depth | Concrete situations per job, tagged (`definitions.md`, "Scenario") | None, or outcomes written as findings |
+| **Open** | — | IDs of their items in `decisions/`. No questions inline | Questions written inline |
 
 Evidence tags:
 
@@ -62,35 +70,56 @@ Evidence tags:
 | **Observed** | The team used the product this way |
 | **Inferred** | Hypothesis. Plausible, unconfirmed, and must not drive a bet alone |
 
-### Shape
+A persona's tag covers its existence and core job. Depth fields carry their
+own tag when it differs.
+
+### Shape of `business/personas/<ID>.md`
 
 ```markdown
-## C1: <name>
+---
+contract: business
+file: persona
+id: C1
+as_of: <business version>
+updated: YYYY-MM-DD
+confirmed: YYYY-MM-DD · <who>
+sources:
+  - <material the confirmed text rests on>
+---
+
+# C1: <name>
 
 - **Who:** …
 - **Variants:** (only if needs differ)
   - **<variant>:** … Their material is … Their stakes are …
 - **Triggers:** "…", "…"
 - **Jobs:**
-  1. When …, I want …, so …
-- **Today they…** … The bar this sets: …
+  1. (functional) When …, I want …, so …
+  2. (social) When …, I want …, so …
+- **Problem (job 1):** I am …, trying to …, but …, because …, which makes me feel …
+  In one line: …
+- **Today they…** … The bar this sets: … They'd switch when: …
 - **What they need:**
   - …
 - **What they need to trust it:** …
 - **What they bring:** …
 - **Stakes:** …
 - **Rhythm:** …
+- **In their words:** "…" (<who>, <date>)
 - **Boundaries:** …
 - **Evidence:** <tag>. <source, quote>
 - **Priority:** now (D-NNN)
-- **Open:** D-NNN, D-NNN
+- **Open:** D-NNN
 
-**Worked scenarios**
+## Worked scenarios
 
 | # | Scenario | Job | Walks away with | Source |
 |---|---|---|---|---|
 | C1-a | … | 1 | <the kind of read they need, never an outcome> | Real / Inferred, <source> |
 ```
+
+A field that wasn't confirmed is left out, not filled with a guess. The depth
+check reports it as missing, and the next walk asks for it.
 
 Two examples of a **thin** and a **full** needs line:
 
@@ -99,154 +128,200 @@ Two examples of a **thin** and a **full** needs line:
 | A, output product | "Wants to test posts" | "The read per audience, leading with risk: the line that causes it and the cultural reason" |
 | B, platform product | "Needs integrations" | "Connect the mail account once, see exactly which scopes, revoke any time" |
 
-### Worked scenarios
+### `business/personas/README.md`
 
-Scenarios are where a persona becomes testable. The fit review runs each one
-through the product (see `fit.md`). Rules:
-
-- One row per situation, tagged, with its source.
-- **Walks away with** says what kind of answer the persona needs. It never
-  states an outcome ("Concept A wins in market X"). An invented outcome in a
-  business file reads as a finding a year later.
-- When a source's scenario breaks a boundary (predicts conversion, states a
-  regulation as fact, quotes an unsourced figure), keep the situation and
-  reframe the output. Note the reframe in the source column.
-
-## File-level sections of `personas.md`
-
-- **At a glance:** ID, name, one-line job, rhythm, evidence, priority.
+- **At a glance:** ID, name, one-line job, rhythm, evidence, priority, confirmed.
 - **Triggers → jobs:** each moment, its job statement, the personas it serves,
   the journeys that carry it. One job often serves several personas; this is
   the only place that shows it.
-- **Personas**, in the shape above.
 - **Evidence log:** when, source, what happened, which persona. Append only.
   Upgrade a persona's tag when evidence arrives.
 
+Rebuild the first two sections whenever a persona file changes. They are
+derived. The evidence log is not.
+
 ## Promise template
 
-| Claim (as written) | Where it appears | Persona(s) | Since |
-|---|---|---|---|
+`business/promises.md` has two sections.
+
+**Promises**:
+
+| ID | Claim (as written) | Where it appears | Persona(s) | Since |
+|---|---|---|---|---|
 
 Copy the claim verbatim. The fit review checks it against `app/capabilities.md`
 and `app/boundaries.md`, and paraphrase hides the problem. When the site lives
 in this repo, "where it appears" is the page source path, which lets orient's
 step 4 flag a promise as changed when its page changes.
 
+**Positioning**: the slot table from `definitions.md`, "Positioning", when
+the business has one. Record it from its source. Don't invent one.
+
 ---
 
 ## Intake: running it
 
+Harvest and draft first, silently. Then walk. **Never open with a
+questionnaire**, and never write a candidate into `business/` without the
+user saying so.
+
 ### 1. Find every source
 
 Search the business folder, and anything the user points to, for personas,
-JTBD studies, positioning docs, decks, meeting notes and customer signals.
+JTBD studies, problem statements, positioning docs, decks, meeting notes and
+customer signals.
 
 ```bash
-grep -rliE "persona|jobs.to.be.done|JTBD|ICP|segment|positioning|pitch|tagline" \
+grep -rliE "persona|jobs.to.be.done|JTBD|ICP|segment|problem statement|positioning|pitch|tagline" \
   --include=*.md --include=*.mdx . | grep -v node_modules | head -40
 # website repo: the pages are where promises live
 find . -path ./node_modules -prune -o \( -path "*/pages/*" -o -path "*/content/*" \) \
   \( -name "*.astro" -o -name "*.md" -o -name "*.mdx" -o -name "*.tsx" \) -print 2>/dev/null | head -40
 ```
 
-### 2. Harvest, don't pick
+### 2. Grade each source by who produced it
 
-Orient step 5 decides which source **governs**. That settles conflicts: two
-priorities for one persona, two names for one job. **It doesn't decide what's
-kept.** Harvest every non-conflicting field from every source, into the
-template above.
+| Produced by | Can support | Note |
+|---|---|---|
+| A customer (interview, email, call notes with quotes) | Real | The strongest input. Keep their words |
+| The team, from using the product or watching someone use it | Observed | |
+| The team's belief (strategy doc, deck, founder notes) | Inferred | Governs **priority** and **who we serve**, not facts about customers |
+| A model (an analysis, a generated persona set) | Inferred, **candidate only** | Never governs. Two models agreeing is still Inferred |
 
-| Source says | Goes to |
-|---|---|
-| A persona field (needs, trust, rhythm, stakes, variants) | That field, with the source's evidence tag |
-| A concrete situation | Worked scenarios, tagged, outcome reframed |
-| "The app should…" (UX guidance) | A journey step marked **(guide)**, rewritten as a need |
-| A persona or job no one has decided on | A `decide` item. The persona file doesn't change yet |
-| An open question | A `clarify` or `validate` item |
-| A claim about what the product does today | Nothing in `business/`. It's the app half's job. Note it in the ledger |
-| An unsourced figure (fees, market sizes, percentages) | Nothing. Note it in the ledger |
+Model output is often the largest source and the least grounded. It is useful
+for finding questions and wording. Don't let its volume set the size of the
+contract.
 
-**Convert, don't drop.** Guidance that names features ("a comparison view",
-"remembered audiences") is still a need. Rewrite it at the step where it
-applies: "the same audiences already selected".
+### 3. Harvest everything into staging
 
-### 3. Keep a source coverage ledger
-
-Every intake writes `business/SOURCES.md`: one row per section of every
-source, saying where it landed.
+Orient step 5 decides which source **governs** conflicts. Harvesting keeps
+the rest. Every section of every source lands in `staging/SOURCES.md`:
 
 ```markdown
-| Source | Section | Landed in | Note |
-|---|---|---|---|
-| personas-analysis-1.md | C1 "What they need to trust it" | personas.md C1 | |
-| personas-analysis-1.md | C1 "How the app should guide" | journeys.md J-C1-1 steps 1, 5, 6 (guide) | converted |
-| personas-analysis-2.md | Scenario 3 | personas.md C2-c | reframed: no conversion claim |
-| personas-analysis-2.md | Persona 4 | decisions.md D-017 | undecided persona |
-| personas-analysis-3.md | "Today the product does N runs" | — | product claim, app side's job |
+| Source | Produced by | Section | Staged as | Note |
+|---|---|---|---|---|
+| analysis-1.md | model | C1 "What they need to trust it" | C1 | |
+| analysis-1.md | model | C1 "How the app should guide" | J-C1-1 steps 1, 5 (guide) | converted to needs |
+| analysis-2.md | model | Scenario 3 | C1 | reframed: no conversion claim |
+| call-notes-03.md | customer | quote on reading humour | C1 "In their words" | |
+| analysis-3.md | model | "Today the product does N runs" | — | product claim, app side's job |
+| deck-v2.md | team | Slide 4 figure "40% faster" | — | unsourced figure |
 ```
 
-A row reading "—" with no note is a loss. The ledger makes it visible, and the
-next audit checks it (`orient.md` step 4).
+A row with "—" needs a note. That is the whole of "never lose": everything is
+accounted for here, and nothing reaches `business/` unwalked.
 
-### 4. Draft, labelled
-
-Drafts are allowed and used right away. Mark every drafted section:
-
-```text
-> **Unconfirmed:** drafted by product-pass from <sources>. See D-NNN.
-```
-
-Adopting a draft is a `confirm` item. An unconfirmed section is reviewed for
-fit, and its findings are labelled unconfirmed and ranked below confirmed
-ones.
-
-### 5. Depth check
-
-Check every `now` persona against the **Depth** fields above (variants count
-only when the persona has them), and its journeys against `journeys.md`,
-"Depth check". A field that's present but matches "Thin if" counts as missing.
-Write the result into the intake summary:
-
-```text
-C1  now  Real      depth 7/7: complete
-C2  now  Real      depth 5/8: missing Trust, Rhythm; 2 needs phrased as features
-C3  now  Real      depth 3/7: no scenarios, Today-they has no bar, no Stakes
-```
-
-### 6. Depth round: ask for what's missing
-
-"Never open with a questionnaire" still holds. **Draft first**, then ask. Once
-the draft exists, ask the user for what only they know, in one message:
-
-- only for `now` personas, highest evidence first;
-- at most five questions, each tied to a field and a persona;
-- each with the draft's current assumption, so a one-word answer is enough.
-
-| Missing field | Ask |
+| Source says | Staged as |
 |---|---|
-| Triggers | "When did <persona> last reach for something like this? What had just happened?" |
-| Today they… | "What did they do instead? How long did it take, and who did they ask?" |
-| Trust | "What would <persona> need to see before acting on a result? What would make them dismiss it?" |
-| What they bring | "What do they have in hand when they start: a file, a link, a draft, nothing?" |
-| Stakes | "What happens if they get this wrong?" |
-| Rhythm | "How often does this happen: weekly, per project, once a year?" |
-| Scenario | "Tell me one real case, even roughly." |
-| Priority | "Is <persona> `now`, `later` or `vision`?" |
+| A persona field | That persona's candidate, with the source and its tag |
+| A job, problem or scenario | That persona's candidate |
+| "The app should…" (UX guidance) | A journey step marked **(guide)**, rewritten as a need |
+| A persona nobody decided on | Its own candidate. Priority is asked in the walk |
+| A public claim or positioning | The promises candidate |
+| An open question the user can answer | A question in the candidate's walk |
+| A claim about what the product does today | Nothing. It's the app half's job. Ledger note |
+| An unsourced figure | Nothing. Ledger note |
 
-Unanswered questions become `clarify` items. The user can skip the round in a
-word.
+### 4. Draft each candidate and grade it
 
-### 7. Keep the business half free of product facts
+One file in `staging/` per candidate: a persona (with its jobs, problems and
+scenarios), its journeys, or the promises and positioning. In each:
+
+- **Merged draft.** Where sources agree, one line. Where they differ, the
+  governing source's line, with the others listed under it.
+- **Grade** per definition, against `definitions.md`: passes, weak (which
+  test) or fails (why).
+- **Questions:** at most three per candidate, each tied to a failing test or
+  a missing Required/Depth field, each with the draft's answer as the default.
+- **Cut list:** what you'd leave staged, and why. Usually: jobs,
+  scenarios and needs from a single model source that no customer or team
+  observation supports.
+
+Keep candidates small. A persona supported by one conversation gets one or
+two jobs in its draft, not everything the analyses imagined. The rest stays
+in the cut list, one line each, where the user can pull it back.
+
+### 5. Order the queue
+
+`staging/README.md`:
+
+```markdown
+| # | Candidate | Grade | Evidence | State | Next question |
+|---|---|---|---|---|---|
+| 1 | C1 persona | weak: one situation? | Real | walking | "Strategy and posting: one person or two?" |
+| 2 | J-C1-1 | passes | Real | queued | — |
+| 3 | C4 persona | weak: no problem | Observed | queued | "What does a founder do today instead?" |
+| 4 | C5 persona | fails: no evidence | Inferred (model) | queued | "Keep, park or drop?" |
+```
+
+States: `queued`, `walking`, `confirmed`, `parked` (with why), `dropped`
+(with why). Order: personas the user already named or backed with Real
+evidence first. A persona before its journeys. Promises and positioning after
+the personas they name.
+
+### 6. Walk it with the user
+
+This is the core of intake. Tell the user what you found in one short
+paragraph: how many sources, what they produced, how many candidates, and
+where you'll start and why. Then walk **one candidate at a time**:
+
+1. Show the draft compactly: the definitions, each with its grade. Not the
+   raw sources.
+2. Ask the candidate's questions in one message, defaults included, so a
+   one-word answer works.
+3. Show the cut list in one line: "Left staged: 3 jobs and 4 scenarios from
+   the model analyses. Pull any back?"
+4. Take the answer: **keep**, **edit** (take the user's words), **drop**
+   (with a reason) or **park** (with when to revisit). Parts can differ: keep
+   the persona, drop one job.
+
+Pace:
+
+- Batch what passes. "C1's triggers, boundaries and scenario C1-a pass. Keep
+  them?" is one question, not three.
+- Stop when the user stops. Suggest a stopping point after each persona.
+  Unwalked candidates stay queued, and the next `intake` resumes there.
+- A question the user can't answer now ("how often does this happen?") stays
+  in the candidate. It is not a decisions item, unless it needs someone else
+  or outside evidence (`validate`).
+- A priority or a choice between personas **is** a decision. Record it in
+  `decisions/` as decided, straight away.
+
+### 7. Confirm into `business/`
+
+Write what the user kept, in the template above, stamped with `confirmed`.
+Update `personas/README.md` and the queue. Parts not walked or not kept stay
+in staging.
+
+### 8. Depth check and summary
+
+Check every confirmed `now` persona against the **Depth** fields (variants
+count only when the persona has them) and its journeys against `journeys.md`,
+"Depth check". A field that matches "Thin if" counts as missing.
+
+```text
+C1  now  Real      confirmed 2026-09-27   depth 6/8: no Problem, no Rhythm
+C2  now  Real      walking                3 questions open
+C4  now  Observed  queued
+Staging: 9 candidates (2 confirmed, 1 walking, 5 queued, 1 parked)
+```
+
+End with the handoff (`orient.md`): what to copy to the app side. Staging is
+never in it.
+
+### 9. Keep the business half free of product facts
 
 Personas and intended journeys describe needs, not features. "Needs to compare
 two versions" is right. "Uses the Comparison view" is wrong. That mapping
-belongs to fit. This rule governs **how** a need is phrased, never **whether**
-it's kept (step 2).
+belongs to fit. Guidance that names features ("a comparison view",
+"remembered audiences") is rewritten as a need at the step where it applies
+("the same audiences already selected"), then walked like anything else.
 
 ## Unabsorbed material
 
-Orient step 4 lists new business material since the last intake. For each one,
-decide whether it changes a persona, a journey, a promise, the scenarios, or
-the evidence log, and add its rows to `SOURCES.md`. Propose the change and
-don't apply it silently. A new customer signal usually means an evidence-log
-row and maybe a tag upgrade. A new deck usually means new promises.
+Orient step 4 lists new business material since the last intake. Harvest it
+into staging (steps 2–4), and add its candidates to the queue. A change to a
+confirmed definition is walked like a new one: show the confirmed text, the
+proposed change and its source, and ask. A new customer signal usually means
+an evidence-log row and maybe a tag upgrade. A new deck usually means new
+promises.

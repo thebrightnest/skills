@@ -9,7 +9,7 @@ There are two kinds, and they live in different halves:
 
 | | Intended journey | Actual journey |
 |---|---|---|
-| Lives in | `business/journeys.md` | `app/journeys.md` |
+| Lives in | `business/journeys/<persona ID>.md` | `app/journeys.md` |
 | Written by | business side (`intake`) | app side (`apply`) |
 | Describes | how it *should* go for this persona | how it *does* go in the product today |
 | Evidence | the persona's evidence (Real / Observed / Inferred) | code paths (`traced`) or the running app (`walked`) |
@@ -25,7 +25,7 @@ journey asks for gets an `A-` ID (`A-3`). Those are the code-ahead candidates.
 ```markdown
 ### J-C1-1: Check a post before publishing
 
-- **Persona:** C1 · **Jobs:** C1.1, C1.3 · **Evidence:** Real (1 person) · **Priority:** now
+- **Persona:** C1 · **Jobs:** C1.1, C1.3 · **Evidence:** Real (1 person) · **Priority:** now · **Confirmed:** 2026-09-27
 - **Trigger:** "I'm about to publish." A post is drafted, about 10 minutes before it goes out.
 - **Stakes:** a post that reads as disrespect in one market is screenshotted before it's deleted.
 
@@ -46,6 +46,10 @@ journey asks for gets an `A-` ID (`A-3`). Those are the code-ahead candidates.
 - **Variants:** —
 - **Scenarios:** C1-a (Real), C1-b, C1-c.
 ```
+
+Each file in `business/journeys/` holds one persona's journeys, under the
+owned-file frontmatter (`file: journeys`). A journey is there only once the
+user confirmed it in the walk, and its header says when.
 
 The same shape for a platform product (example B in `app-snapshot.md`):
 
@@ -93,7 +97,8 @@ Fields:
 what the result leads with) is a need like any other. Write it at the step it
 applies to and mark it `(guide)`. "Stimulus-first entry" becomes "paste first,
 nothing to set up before value". Never drop guidance because it sounds like a
-feature. Rephrase it as a need.
+feature. Rephrase it as a need, and confirm it in the walk like any other
+step (`business-inputs.md` step 6).
 
 ### Depth check
 
@@ -103,7 +108,7 @@ A journey is **thin** when any of these hold:
 - the entry step has no (guide) need, so how they start is unspecified;
 - no **Trusts it when**;
 - **Walks away with** isn't a concrete thing (a decision, a list, a file);
-- a job in `personas.md` has no journey and no line saying which journey carries it.
+- a confirmed job has no journey and no line saying which journey carries it.
 
 Thin journeys are reported in the intake summary with the persona depth
 check (`business-inputs.md` step 5).

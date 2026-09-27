@@ -3,6 +3,36 @@
 All notable changes to the brightnest plugin. Versions follow `version` in
 `.claude-plugin/plugin.json`. Scope each entry by skill: `**design-pass:** …`.
 
+## 1.2.0 (2026-09-27)
+
+- **product-pass:** intake guides instead of harvesting straight into the
+  contract. Sources are graded by who produced them and harvested into
+  `staging/`, which stays on the business side and is never copied. The user
+  walks each candidate and keeps, edits, drops or parks it. Only what they
+  confirm enters `business/`, stamped with the date.
+- **product-pass:** new `references/definitions.md`: a quality bar, grades
+  (passes, weak, fails) and coaching questions for personas, jobs, problems,
+  scenarios, intended journeys, promises and positioning.
+- **product-pass:** jobs are tagged functional, social or emotional. Personas
+  gain a Problem per core job (I am, trying to, but, because, feel), a switch
+  condition in Today they…, and optional "In their words" quotes (Real only).
+- **product-pass:** `promises.md` can hold a positioning statement. The fit
+  review and `check` test its slots against personas, jobs, Today they… and
+  the app snapshot. The fit review also checks that the product removes each
+  problem's cause, and that social and emotional jobs are served.
+- **product-pass:** the fit review runs on confirmed definitions only. A
+  review of staged candidates is provisional and raises nothing.
+- **product-pass:** the register is a folder, `decisions/`, with one file per
+  item and an index rebuilt on every write. Files are never renamed or
+  deleted, so copies merge cleanly. The `confirm` kind is gone. Each run adds
+  at most five items, and the rest go to a one-line Noticed list.
+- **product-pass:** personas and intended journeys are one file per persona
+  (`business/personas/`, `business/journeys/`). The handoff says to delete the
+  old mirror before copying.
+- **product-pass:** rule 13 is now "Stage everything, confirm deliberately",
+  replacing "Never thin what you're given". The depth round is folded into
+  the walk.
+
 ## 1.1.0 (2026-09-26)
 
 - **product-pass:** a persona template with Required, Depth and Optional

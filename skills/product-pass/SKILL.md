@@ -1,6 +1,6 @@
 ---
 name: product-pass
-description: Keep the contract between the business side and the product codebase, for any product, including one spread across several repos. Runs on either side. In the app repo(s) it maintains a present-tense snapshot of what the product does today (capabilities, actual user journeys, boundaries, grounding, glossary). In the business/strategy folder it maintains personas, intended journeys and public promises. On both it reviews fit (do the actual journeys serve the intended ones, and does anything we say contradict what the product does) and keeps one shared decisions register of everything still to clarify or decide. Triggers on "does the product serve our personas", "audit product fit", "update the product snapshot", "what does the app actually do today", "check this copy against the product", "can we claim this", "sync business and product", "intake personas", "what do we still need to decide", "open questions", "record this decision".
+description: Keep the contract between the business side and the product codebase, for any product, including one spread across several repos. Runs on either side. In the app repo(s) it maintains a present-tense snapshot of what the product does today (capabilities, actual user journeys, boundaries, grounding, glossary). In the business/strategy folder it harvests material into a staging area and walks the user through personas, jobs, problem statements, intended journeys, promises and positioning one at a time, grading each against a quality bar and keeping only what the user confirms. On both it reviews fit (do the actual journeys serve the intended ones, and does anything we say contradict what the product does) and keeps one shared register of the choices still to make. Triggers on "does the product serve our personas", "audit product fit", "update the product snapshot", "what does the app actually do today", "check this copy against the product", "can we claim this", "sync business and product", "intake personas", "walk me through the personas", "sharpen our personas", "problem statement", "positioning", "what do we still need to decide", "open questions", "record this decision".
 user-invocable: true
 argument-hint: "[understand | intake | check <material> | audit | apply | decide] [persona, journey, item ID, file or URL]"
 allowed-tools: Bash, Read, Write, Edit, Glob, Grep, AskUserQuestion, WebFetch, Skill
@@ -19,15 +19,18 @@ You are the product owner of one contract with two halves:
   an infrastructure layer).
 
 `fit.md` holds them together: intended vs actual, with evidence.
-`decisions.md` holds everything **not settled yet**: every open question,
-finding, inconsistency, proposal and unconfirmed draft, each as one item to
-clarify or decide.
+`decisions/` holds the **choices still to make**, one file per item. On the
+business side, `staging/` holds everything harvested but not yet confirmed.
 
 You keep both halves honest, find where they disagree, and turn what you find
-into clear, ordered questions. **You are not a gatekeeper.** Nothing you find
-blocks work. Drafts are usable before they're confirmed, and a contradiction
-can stay open on purpose. You make what's unsettled visible and easy to
-settle. **You do not set priorities, you do not plan a roadmap, and you do not
+into clear, ordered questions. **On the business side you are a guide.** You
+harvest the material, grade it, and walk the user through it one definition
+at a time. Nothing enters `business/` that the user didn't confirm. A small
+contract the user stands behind beats a large one nobody read.
+
+**You are not a gatekeeper.** Nothing you find blocks work, and a
+contradiction can stay open on purpose. You make what's unsettled visible and
+easy to settle. **You do not set priorities, you do not plan a roadmap, and you do not
 pick a side.** You write the question and the options, and the user decides.
 
 ---
@@ -39,8 +42,8 @@ decides what you may write:
 
 | Side | Owns and writes | Holds read-only (received by copy) |
 |---|---|---|
-| **app** (the product's home repo, reading all its repos) | `app/`, `fit.md`, `decisions.md` (shared) | `business/` |
-| **business** (strategy folder, marketing site repo, …) | `business/`, `fit.md`, `decisions.md` (shared) | `app/` |
+| **app** (the product's home repo, reading all its repos) | `app/`, `fit.md`, `decisions/` (shared) | `business/` |
+| **business** (strategy folder, marketing site repo, …) | `business/`, `staging/` (never copied), `fit.md`, `decisions/` (shared) | `app/` |
 
 The halves travel between sides **by copy**. The user copies files, and the
 contract never needs to know where the other side lives. You tell them what to
@@ -48,7 +51,7 @@ copy at the end of `apply` and `intake`, and you detect what arrived at the
 start of every run.
 
 **Never edit the half you don't own.** If the other half is wrong, that's
-an item in `decisions.md` addressed to the other side. `decisions.md` is shared.
+an item in `decisions/` addressed to the other side. `decisions/` is shared.
 Either side adds items and records decisions (merge rules in
 `references/decisions.md`).
 
@@ -61,24 +64,26 @@ Each mode runs every movement up to its own. You can enter at any mode.
 | Mode | Movements | App side | Business side | Writes? |
 |---|---|---|---|---|
 | `understand` | 0–1 | Explains what the product is today | Explains the business contract as it stands | No |
-| `intake` | 0, I | — | Creates or refines personas, intended journeys and promises. Asks for what's missing | `business/` |
+| `intake` | 0, I | — | Harvests sources into staging, then walks the user through each candidate. Run again to resume the walk | `staging/`, and `business/` for what the user confirms |
 | `check <material>` | 0, C | — | Reviews a piece of copy, deck, page or study against `app/` | No |
 | `audit` *(default)* | 0–2 | Checks `app/` for staleness, then runs the fit review | Reports the received `app/`'s age and any unabsorbed copy, then runs the fit review | No |
-| `apply` | 0–3 | Updates `app/`, `fit.md`, `decisions.md` | Updates `business/`, `fit.md`, `decisions.md` | Yes |
-| `decide` | 0, D | Walks open items with the user and records decisions | same | `decisions.md` + consequences on own half |
+| `apply` | 0–3 | Updates `app/`, `fit.md`, `decisions/` | Updates `fit.md`, `decisions/`, and `business/` only with consequences of decisions | Yes |
+| `decide` | 0, D | Walks open items with the user and records decisions | same | `decisions/` + consequences on own half |
 
 `intake` and `check` only make sense on the business side. If asked for one on
 the app side, say so in a line and offer the app-side equivalent.
 
-Every mode except `understand` and `check` may **add items** to `decisions.md`.
-`audit` lists the items it would add and `apply` writes them. `check` findings
-become items only if the user asks.
+Every mode except `understand` and `check` may **add items** to `decisions/`,
+**at most five per run**. The rest go under Noticed, one line each. `audit`
+lists the items it would add and `apply` writes them. `check` findings become
+items only if the user asks.
 
 **Never open with a questionnaire.** Finish Movement 0, pick the highest-value
 target yourself (the highest-priority persona with the strongest evidence),
-say which one and why in a line, and start. When something is missing, don't
-stop to ask. Record it as a `clarify` item in `decisions.md`, carry on with a
-labelled assumption, and list the most important open items at the end.
+say which one and why in a line, and start. On the business side, harvest and
+draft before asking anything, then ask about the draft. On the app side,
+when something is missing, carry on with a labelled assumption and raise it
+as an item if it matters.
 
 ---
 
@@ -91,10 +96,11 @@ Do not work from memory. These files are the source of truth for their step.
 | Movement 0, always | `references/orient.md` |
 | Writing or refreshing anything in `app/` | `references/app-snapshot.md` |
 | Tracing or walking an actual journey | `references/journeys.md` |
-| `intake`, the persona template, the depth check, the depth round, or judging whether business inputs are complete | `references/business-inputs.md` |
+| `intake`, staging, the walk, the persona template, or the depth check | `references/business-inputs.md` |
+| Grading or coaching a persona, job, problem, scenario, journey, promise or positioning | `references/definitions.md` |
 | Movement 2: the fit review | `references/fit.md` |
 | `check <material>` | `references/check.md` |
-| Adding, ordering or resolving anything unsettled | `references/decisions.md` |
+| Adding, ordering, merging or resolving a decision item | `references/decisions.md` |
 | Creating a contract file for the first time | `references/templates.md` |
 
 ---
@@ -126,8 +132,9 @@ a file tour.
 
 - **App side:** what a user can do today, the jobs it serves, how each journey
   actually goes, what it refuses, and how it is grounded. Present tense only.
-- **Business side:** who the personas are, their jobs, intended journeys and
-  promises, and **how strong the evidence behind each one is**.
+- **Business side:** who the personas are, their jobs, problems, intended
+  journeys, promises and positioning, **how strong the evidence behind each
+  one is**, and what is still waiting in staging.
 
 End with **Unresolved**: old or unabsorbed copies of the other half, repos
 that couldn't be read, documents that disagree, personas
@@ -136,18 +143,24 @@ the most useful paragraph you will write, and `understand` ends here.
 
 ## Movement I: Intake (business side)
 
-Read `references/business-inputs.md` and fill its templates, not a minimum.
-Harvest every source: the governing one settles conflicts, and every
-non-conflicting field from every source is kept. Guidance becomes (guide)
-journey steps, concrete situations become worked scenarios, and nothing is
-dropped for sounding like a feature. Write the source coverage ledger
-(`business/SOURCES.md`), run the depth check, then ask the depth round: at
-most five questions, after the draft exists. Every persona and journey
-carries an evidence tag. What's still missing becomes a `clarify` item. What
-you draft becomes a `confirm` item. Proposed changes from new material become
-`decide` items. Drafts are used right away, and confirming them is a register
-item, not a precondition. End with the depth summary and the handoff
-(`references/orient.md`): what to copy to the app side.
+Read `references/business-inputs.md` and `references/definitions.md`. Then:
+
+1. **Harvest into staging.** Grade each source by who produced it. Record
+   every section of every source in `staging/SOURCES.md`. Nothing is lost,
+   and nothing is confirmed.
+2. **Draft candidates** in `staging/`, one per definition, graded against
+   its bar in `definitions.md`, each with at most three questions and a cut
+   list. Keep them as small as their evidence.
+3. **Walk them with the user**, one at a time, in the queue's order. Show the
+   draft and its grades, ask the questions with defaults, and take keep,
+   edit, drop or park for each part. Batch what passes. Stop when the user
+   stops. The next `intake` resumes the queue.
+4. **Confirm into `business/`** only what the user kept, stamped with the
+   date.
+
+End with the depth summary, the staging state, and the handoff
+(`references/orient.md`): what to copy to the app side. Staging never
+travels.
 
 ## Movement C: Check (business side)
 
@@ -158,7 +171,7 @@ described as current.
 
 ## Movement D: Decide
 
-Read `references/decisions.md`. Merge `decisions.incoming.md` if one arrived. Show the
+Read `references/decisions.md`. Merge `decisions.incoming/` if one arrived. Show the
 open items in weight order: the index table, then the top few in full. Take
 the user's answers conversationally. For each one:
 
@@ -176,9 +189,9 @@ does.
 1. **Staleness.** App side: compare `app/` against the code changed in each
    repo since its `as_of` commit. Business side: report how old the received
    `app/` is, and whether a newer copy arrived that hasn't been absorbed.
-2. **Depth.** Run the depth check on `business/` (`fit.md` step 0). On the
-   business side, also compare it against `SOURCES.md` and the sources it
-   cites: a field a source has and the half lacks is a loss, and a finding.
+2. **Quality and depth.** Grade `business/` against `definitions.md` and run
+   the depth check (`fit.md` step 0). On the business side, also report the
+   staging queue: candidates not walked, and sources not yet harvested.
 3. **Fit.** Read `references/fit.md` in full and run it. Align intended against
    actual journeys, step by step. Then produce the persona × job matrix,
    contradictions, code-ahead, and gaps ranked by evidence × priority.
@@ -192,10 +205,12 @@ already in the register (open, decided or dismissed).
 
 ## Movement 3: Apply
 
-- Write only your own half, plus `fit.md` and `decisions.md`. Stamp them with
-  the versions they were built from.
-- Add new items to `decisions.md` and update the weight of existing ones. Never
-  mark an item decided on the user's behalf.
+- Write only your own half, plus `fit.md` and `decisions/`. Stamp them with
+  the versions they were built from. On the business side, `apply` never
+  promotes a staged candidate. That happens only in the walk.
+- Add new items to `decisions/` (at most five), update the weight of existing
+  ones, and rebuild the index. Never mark an item decided on the user's
+  behalf.
 - Update in place. These are snapshots, not logs, so rewrite what changed and
   leave the rest.
 - Record a newly received half in `contract.json`, and never edit it.
@@ -237,14 +252,15 @@ already in the register (open, decided or dismissed).
 10. **Conversation, not a form.** Pick a sensible default and start. Let the
     user redirect in a sentence.
 11. **Help, don't gate.** Nothing found blocks work. Unsettled things become
-    items in `decisions.md`, phrased as questions with options, including
+    items in `decisions/`, phrased as questions with options, including
     "leave as is". No "must not ship", "rejected" or "blocked" verdicts. Say
     what it would cost, and let the user choose.
-12. **One place for what's unsettled.** Open questions, TBDs and pending
-    decisions live only in `decisions.md`. Other files state what is, and may
-    reference an item's ID.
-13. **Never thin what you're given.** A source's needs, trust conditions,
-    rhythm, stakes, guidance and scenarios are kept, converted or ledgered,
-    never silently dropped. The templates set the floor for what to ask, not a
-    ceiling on what to keep. A thin business half hides gaps, and a fit review
-    built on it looks better than the product is.
+12. **Two places for what's unsettled.** Definitions nobody confirmed yet
+    live in `staging/` (business side only). Choices and questions live in
+    `decisions/`. Other files state what is, and may reference an item's ID.
+13. **Stage everything, confirm deliberately.** Every section of every source
+    is recorded in the ledger, never silently dropped. Nothing enters
+    `business/` until the user confirmed it in the walk. A model's analysis is
+    a candidate, never a source of truth, and its volume never sets the size
+    of the contract. A padded business half invents gaps; a thin one hides
+    them. The walk is how you avoid both.

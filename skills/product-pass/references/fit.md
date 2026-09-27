@@ -12,25 +12,31 @@ carries `mirror as of <version>`, because the other side may have moved on.
 
 ---
 
-## 0. Check the input is deep enough to review
+## 0. Check the input is good enough to review
 
-Run the depth check on the business half before judging fit
-(`business-inputs.md` step 5, `journeys.md` "Depth check"). On the app side
-you hold a mirror, so you can't fix it, but you can say it:
+The fit review runs on `business/` only: what the user confirmed. Staged
+candidates don't count. The user can ask for a provisional review of a staged
+candidate. Label it `provisional: staged`, and add nothing to the register
+from it.
 
-- A `now` persona missing **What they need**, **Trust** or **Scenarios**, or a
-  thin journey, gets a line in **Not verified**: "fit for C2 is shallower than
-  it looks: no trust needs, no scenarios".
-- If the mirror's `SOURCES.md` shows rows that landed nowhere, or cites
-  sources richer than the mirror, add a `confirm` item addressed to the
-  business side ("restore what the intake dropped?").
+Before judging fit, grade the confirmed half against `definitions.md` and
+run the depth check (`business-inputs.md` step 8, `journeys.md` "Depth
+check"). On the app side you hold a mirror, so you can't fix it, but you can
+say it:
+
+- A `now` persona missing **What they need**, **Trust**, a **Problem** or
+  **Scenarios**, or a thin journey, gets a line in **Not verified**: "fit for
+  C2 is shallower than it looks: no trust needs, no problem".
+- A definition that grades **weak** or **fails** gets a line there too, with
+  the test it fails. It's for the business side's next walk, not a register
+  item.
 
 A thin business half makes the product look like it fits. Say so rather than
 rate it `served`.
 
 ## 1. Align every intended journey with its actual journey
 
-For each intended journey in `business/journeys.md`, take the actual journey
+For each intended journey in `business/journeys/`, take the actual journey
 with the same ID from `app/journeys.md` (or trace it now if it's missing) and
 compare them step by step:
 
@@ -75,12 +81,22 @@ Then give the journey one overall verdict:
 
 A `now` journey that is only `traced` can be at most **partial (unverified)**.
 
-## 1b. Trust needs and worked scenarios
+## 1b. Trust needs, problems, jobs and worked scenarios
 
-Two checks that journeys alone miss:
+Four checks that journeys alone miss:
 
 - **Trust needs.** One row per persona's **What they need to trust it**:
   need, what the product shows today, status, evidence.
+- **Problems.** For each confirmed problem, find the step where its **but**
+  happens and ask whether the product removes the **because**. A product can
+  match every step and leave the cause in place. "Can't tell how a joke reads,
+  because nobody local sees it" is served only if the result gives the local
+  reason, not a score. A: a score with no reason leaves the cause. B: an
+  agent that acts but lists nothing it touched leaves "can't see what it did".
+- **Social and emotional jobs.** A social job needs an output the persona
+  can hand to whoever they answer to: check **Shows it to**. An emotional job
+  is served when the result removes the feeling: check **Trusts it when** and
+  **Stakes**.
 - **Scenarios.** Run each `now` persona's worked scenarios through the actual
   journeys, on paper. What they bring (a catalogue, a URL, a CSV) is where
   input gaps appear: the journey says "bring the material" and the scenario
@@ -110,6 +126,16 @@ Check every row of `business/promises.md` against `app/capabilities.md` and
   your data" when an operator can, or "works with any account" when only one
   provider is supported.
 
+Check the **Positioning** slots, when `promises.md` has them:
+
+| Slot | Contradiction when |
+|---|---|
+| For | It names no confirmed persona |
+| that need | It matches no confirmed job |
+| is a | The category word is on `app/glossary.md`'s avoid list, or the product describes itself otherwise |
+| that / provides | Unbacked, over-claimed or refused, as for a promise |
+| Unlike | The alternative isn't in any persona's **Today they…** |
+
 Also check each persona's `Boundaries` and each journey's `Must not` against
 what the product does. A persona that must never get a prediction, on a path
 that shows a score, is a contradiction. So is a persona whose credentials must
@@ -124,13 +150,13 @@ whether it matters.
 
 ## 5. Rank the gaps and hand them to the register
 
-`fit.md` states the fit. What to do about it lives in `decisions.md`. Group
+`fit.md` states the fit. What to do about it lives in `decisions/`. Group
 the non-`served` steps and contradictions by **underlying issue**. One missing
 capability that breaks three journeys is one item, not three. Then rank the
 issues by:
 
 1. **Priority** of the persona: `now` > `later` > `vision`.
-2. **Evidence**: Real > Observed > Inferred > Unconfirmed draft.
+2. **Evidence**: Real > Observed > Inferred.
 3. **Severity**: `refused` contradiction or `missing` core step > `diverges` >
    `friction`.
 
@@ -147,8 +173,9 @@ You rank gaps. **You don't turn them into a plan.** "J-C1-1 step 1 diverges:
 Real / now" is a finding. "Build stimulus-first entry next sprint" is a
 decision that isn't yours.
 
-Each issue becomes (or updates) an item in `decisions.md` (see
-`references/decisions.md`). A contradiction is a `decide` item ("change the
+Each issue becomes (or updates) an item in `decisions/` (see
+`references/decisions.md`), up to the limit of five new items per run. The
+rest go under **Noticed**. A contradiction is a `decide` item ("change the
 product, change the promise, or leave both?"). A `business-ahead` gap is a
 `decide` item for the product side ("serve this step, and how?"). A traced-only
 `now` journey is a `validate` item ("walk it"). `code-ahead` is a `decide` item
@@ -179,13 +206,16 @@ business_as_of: <sha|date>
 
 ## Ranked gaps
 | # | Gap | Direction | Persona / evidence / priority | Evidence | Item |
-…   <!-- Item = the decisions.md ID that carries it. No options or recommendations here -->
+…   <!-- Item = the decisions/ ID that carries it, or "noticed". No options or recommendations here -->
 
 ## Contradictions
 …
 
 ## Trust needs
 <one row per persona trust need: need · product today · status · evidence>
+
+## Problems
+<only the problems whose "because" the product leaves in place: problem · step · what remains · gap #>
 
 ## Scenarios
 <only the scenarios that break: scenario · where it breaks · gap #>
@@ -197,11 +227,11 @@ business_as_of: <sha|date>
 <one table per intended journey, as in step 1>
 
 ## Not verified
-<journeys only traced, the mirror's age, repos that couldn't be reached, unconfirmed business drafts. Each one is also a validate or confirm item>
+<journeys only traced, the mirror's age, repos that couldn't be reached, definitions that grade weak or fail, depth that's missing>
 ```
 
 No open questions, options or suggestions in `fit.md`. Those are items in
-`decisions.md`, referenced by ID.
+`decisions/`, referenced by ID.
 
 The **Summary** and **Ranked gaps** are what the business side reads. Keep
 them in plain language. The alignment tables are the evidence behind them.
