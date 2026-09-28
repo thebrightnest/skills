@@ -1,11 +1,12 @@
 # brightnest
 
-A Claude Code plugin with two skills:
+A Claude Code plugin with three skills:
 
 | Skill | What it does |
 |---|---|
 | `design-pass` | Understand a product's frontend, then audit it, propose directions, and build the agreed one. |
 | `product-pass` | Keep the business side (personas, jobs, problems, intended journeys, promises, positioning) and the product codebase (what it does today) telling the same story. Guides you through each definition and keeps only what you confirm. |
+| `behavior-pass` | Review the product with the Hook Model and behavioral science: which habits are worth forming, the loop each journey runs today, hook designs that pass the Regret Test, and habit test plans. Needs a `product-pass` contract. |
 
 ## Install
 
@@ -38,12 +39,15 @@ Describe what you want and Claude picks the right skill:
   runs `design-pass`.
 - "Does the product serve our personas?" or "can we claim this on the website?"
   runs `product-pass`.
+- "Why don't users come back?" or "is this habit forming?" runs
+  `behavior-pass`.
 
 Or call a skill directly:
 
 ```text
 /brightnest:design-pass audit /settings
 /brightnest:product-pass understand
+/brightnest:behavior-pass audit
 ```
 
 ## Update

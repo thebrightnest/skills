@@ -13,6 +13,7 @@ skill is reading it.
 skills/
   design-pass/        SKILL.md + references/
   product-pass/       SKILL.md + references/
+  behavior-pass/      SKILL.md + references/
 AGENTS.md             this file (CLAUDE.md imports it)
 CHANGELOG.md          one entry per plugin version, bullets scoped by skill
 README.md             what the plugin is and how to install it
@@ -91,6 +92,51 @@ references/           one file per step, loaded only when that step runs
 - When the schema changes, list the live contracts that need migrating and
   offer to migrate them. They live in the product repos (`docs/product/`) and
   business folders (`product-contract/`).
+
+## behavior-pass
+
+Reviews a product through behavioral science and the Hook Model (trigger,
+action, variable reward, investment). It reads a product-pass contract
+(personas, intended and actual journeys, fit) and writes only to its own
+folder, `behavior/`: a review, chosen hooks, habit test plans and its own
+register of choices (`B-` IDs).
+
+```text
+SKILL.md              entry point: inputs, modes, movements, rules, section index
+references/
+  orient.md           Movement 0: the contract, its age, behavior.json, loop code
+  hook-model.md       the frame: four phases, habit zone, research, sources
+  habit-potential.md  habit hypotheses and the habit zone verdict per persona
+  hook-audit.md       the loop each journey runs today, phase ratings, tactics
+  ethics.md           Manipulation Matrix, Regret Test, patterns that fail
+  proposal.md         two or three hook designs per journey
+  habit-testing.md    identify, codify, modify, events and guardrails
+  decisions.md        its own register, one file per item
+  templates.md        behavior/ layout and first-time files
+```
+
+### Forbidden
+
+- **Writing to the product contract.** `business/`, `app/`, `fit.md` and the
+  contract's `decisions/` are read-only. What they lack becomes a `B-` item
+  marked "Raise in the contract".
+- **Proposing a hook that fails `ethics.md`**, or showing one as a contrast.
+- **Naming a real product** in `SKILL.md` or `references/`, including the
+  book's own case studies. Examples use the contract's archetypes: **A,
+  output product** (C1, J-C1-1) and **B, platform product** (T2, J-T2-1).
+- **Stating a research finding as evidence about users.** It's a reason to
+  test.
+
+### Mandatory
+
+- Keep the contract fields this skill reads (the table in `SKILL.md`, "What
+  it needs from the contract", and `habit-potential.md` step 1) in sync with
+  product-pass's persona and journey templates. When product-pass renames or
+  drops a field, update behavior-pass in the same change.
+- Keep the `behavior/` layout in `templates.md` in sync with `orient.md`
+  step 3 and the paths in every reference.
+- Keep the phase ratings and loop verdicts identical across `hook-audit.md`,
+  `templates.md` and `decisions.md`.
 
 ## Git
 

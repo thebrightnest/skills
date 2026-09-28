@@ -3,6 +3,23 @@
 All notable changes to the brightnest plugin. Versions follow `version` in
 `.claude-plugin/plugin.json`. Scope each entry by skill: `**design-pass:** …`.
 
+## 1.3.0 (2026-09-28)
+
+- **behavior-pass:** new skill. Reviews a product with the Hook Model from
+  Nir Eyal's *Hooked* (trigger, action, variable reward, investment),
+  checked against habit research (Fogg, Wood, Lally, self-determination
+  theory). It needs a product contract kept by product-pass and never edits
+  it. Its output lives in its own folder, `behavior/`.
+- **behavior-pass:** modes `understand` (a habit hypothesis and habit zone
+  verdict per persona), `audit` (the loop each journey runs today, rated per
+  phase, and every tactic checked), `propose` (two or three hook designs per
+  journey), `test` (a habit test plan: identify, codify, modify, events and
+  guardrails) and `decide` (its own register, `B-` IDs).
+- **behavior-pass:** proposes only hooks in the facilitator quadrant of the
+  Manipulation Matrix that pass the Regret Test. Existing tactics that fail
+  are reported as risks with options. No hook for a journey the fit review
+  doesn't rate `served`.
+
 ## 1.2.0 (2026-09-27)
 
 - **product-pass:** intake guides instead of harvesting straight into the

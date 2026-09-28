@@ -1,11 +1,11 @@
 {
   "name": "brightnest",
-  "version": "1.2.0",
-  "description": "Product and design skills: design-pass (understand a frontend, then propose and build design changes) and product-pass (keep the business side and the product codebase telling the same story).",
+  "version": "1.3.0",
+  "description": "Product and design skills: design-pass (understand a frontend, then propose and build design changes), product-pass (keep the business side and the product codebase telling the same story) and behavior-pass (find the habits worth forming and design hooks users would not regret, with the Hook Model and behavioral science).",
   "author": {
     "name": "Pedro Rocha",
     "url": "https://github.com/thebrightnest"
   },
   "repository": "https://github.com/thebrightnest/skills",
-  "keywords": ["design", "product", "ux", "audit", "personas", "journeys"]
+  "keywords": ["design", "product", "ux", "audit", "personas", "journeys", "habits", "behavioral-design"]
 }
