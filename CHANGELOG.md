@@ -3,6 +3,34 @@
 All notable changes to the brightnest plugin. Versions follow `version` in
 `.claude-plugin/plugin.json`. Scope each entry by skill: `**design-pass:** …`.
 
+## 1.4.0 (2026-11-23)
+
+- **compliance-pass:** new skill. Scans product and marketing website codebases
+  pinned to git commits (`as_of`), so re-runs diff only changed migrations,
+  dependencies, OAuth scopes, AI models, billing flows, and cookies.
+- **compliance-pass:** audits and drafts Privacy Policy, Terms of Service, and
+  Subprocessors pages against GDPR + ePrivacy, the EU AI Act (Art. 50
+  transparency, training commitments, Annex III boundaries), Google API Limited
+  Use, and modular national jurisdiction packs starting with Portugal (*Lei n.º
+  58/2019*, *DL n.º 7/2004*, *Art. 809.º Código Civil* liability carve-outs, and
+  dual-track B2B + consumer protections for withdrawal, RAL arbitration, and
+  *Livro de Reclamações Eletrónico*).
+- **compliance-pass:** separates unconfirmed corporate/retention choices into
+  `decisions/` (`C-` IDs) and lawyer review items into `review.md` (Counsel
+  Review Brief) so `documents/` and published website pages never ship with
+  placeholders or inline warning tags.
+- **boring-business:** new skill. End-to-end toolkit for discovering, ideating,
+  validating, and launching profitable bootstrapped micro-SaaS, niche
+  directories, and workflow tools.
+- **boring-business:** includes the "Selling Shovels" ideation workflow, Tier 1
+  Quick Validation (Go/No-Go scorecard), Tier 2 Deep Validation (5 weighted
+  pillars, SERP intelligence, unit economics, 14-day MVP plan), and conversion
+  landing page copy blueprints.
+- **boring-business:** bundles a searchable catalog of 137+ verified
+  bootstrapped business case studies (`data/case_studies.json`,
+  `data/boringbiz.db`) with zero-dependency Python search and scoring scripts
+  (`scripts/search_case_studies.py`, `scripts/score_calculator.py`).
+
 ## 1.3.0 (2026-09-28)
 
 - **behavior-pass:** new skill. Reviews a product with the Hook Model from

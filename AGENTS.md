@@ -14,6 +14,8 @@ skills/
   design-pass/        SKILL.md + references/
   product-pass/       SKILL.md + references/
   behavior-pass/      SKILL.md + references/
+  compliance-pass/    SKILL.md + references/
+  boring-business/    SKILL.md + references/ + templates/ + examples/ + scripts/ + data/
 AGENTS.md             this file (CLAUDE.md imports it)
 CHANGELOG.md          one entry per plugin version, bullets scoped by skill
 README.md             what the plugin is and how to install it
@@ -137,6 +139,69 @@ references/
   step 3 and the paths in every reference.
 - Keep the phase ratings and loop verdicts identical across `hook-audit.md`,
   `templates.md` and `decisions.md`.
+
+## compliance-pass
+
+Audits product and website codebases at exact git commits (`as_of`), extracts
+data flows, subprocessors, OAuth scopes, cookies, and AI systems, checks them
+against GDPR, the EU AI Act, and modular national jurisdiction packs (starting
+with Portugal B2B and consumer rules), keeps unconfirmed corporate and policy
+choices in `decisions/` (`C-` IDs), separates a Counsel Review Brief in
+`review.md` from clean publishable markdown in `documents/`, and renders native
+legal pages on the website.
+
+```text
+SKILL.md              entry point: sides, modes, movements, rules, section index
+references/
+  orient.md           Movement 0: side, repo SHAs, git-diff triggers, copy handoff
+  code-scan.md        extracting schemas, subprocessors, OAuth vaults, AI, cookies
+  gdpr.md             Controller/Processor split, Art. 6 bases, ePrivacy, Google Limited Use
+  eu-ai-act.md        Reg. 2024/1689 role classification, Art. 50 transparency, AI clauses
+  jurisdictions.md    national law packs: Portugal (DL 7/2004, Lei 58/2019, Art. 809 CC, B2C)
+  drafting.md         layered plain-language structure, Counsel Review Brief, publishing
+  decisions.md        C- register for entity facts, retention choices, and policy questions
+  templates.md        compliance/ layout and compliance.json schemas
+```
+
+### Forbidden
+
+- **Naming a real product** in `SKILL.md` or `references/`. Use **A, output
+  product** and **B, platform product**.
+- **Inventing corporate or statutory entity facts** (company name, tax ID,
+  address, retention choices) or placing `[TBD]` / `[⚠️ LEGAL REVIEW]` markers
+  inside `documents/`.
+- **Recording where the other side lives** in `compliance.json`. The `app/`
+  inventory travels to `site` by manual copy.
+- **Writing to a `product-pass` contract.** `contract.json` and its folders are
+  strictly read-only.
+
+### Mandatory
+
+- Keep `<compliance_dir>/` paths and `compliance.json` schemas identical across
+  `orient.md`, `decisions.md`, and `templates.md`.
+- Every statement in `app/` and `site/` cites `<repo>:<path>[:<line>]`.
+
+## boring-business
+
+Discovers, ideates, validates, and prepares launches for profitable bootstrapped
+micro-SaaS, niche directories, and workflow businesses. Bundles references,
+templates, worked examples, zero-dependency Python helper scripts, and a
+searchable case-study catalog (`case_studies.json` and `boringbiz.db`).
+
+```text
+SKILL.md              entry point: request router, five workflows, bundled index
+references/           playbooks for ideation, validation, automation, SEO, copywriting
+templates/            output templates for ideation, scorecards, deep reports, landing copy
+examples/             worked examples for ideation, quick validation, deep validation
+scripts/              score_calculator.py and search_case_studies.py (stdlib only)
+data/                 case_studies.json and boringbiz.db (137+ case studies)
+```
+
+### Mandatory
+
+- Keep `SKILL.md` references, templates, scripts, and data links in sync with
+  the files on disk.
+- Keep `scripts/` zero-dependency Python 3 (standard library only).
 
 ## Git
 
